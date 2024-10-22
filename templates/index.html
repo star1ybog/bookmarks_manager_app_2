@@ -3,6 +3,8 @@
 
 {% block content %}
 <h1>Bookmarks Manager</h1>
+
+<!-- Bookmark Form -->
 <div>
     <form id="bookmark-form">
         <input type="text" id="title" placeholder="Title" required />
@@ -12,12 +14,20 @@
     </form>
 </div>
 
-<ul id="bookmarks-list">
-    {% for bookmark in bookmarks %}
-    <li data-id="{{ bookmark.id }}">
-        <a href="{{ bookmark.url }}" target="_blank">{{ bookmark.title }}</a>
-        <button class="delete-btn">Delete</button>
-    </li>
-    {% endfor %}
-</ul>
+<!-- Categorized Bookmarks -->
+{% for category, bookmarks in categorized_bookmarks.items() %}
+<div class="category-block">
+    <h2>{{ category }}</h2>
+    <ul class="bookmark-list">
+        {% for bookmark in bookmarks %}
+        <li>
+            <span>ID: {{ bookmark.id }} ; </span>
+            <a href="{{ bookmark.url }}" target="_blank">{{ bookmark.title }}</a>
+            <a href="{{ url_for('get_bookmark', bookmark_id=bookmark.id) }}">View</a>
+            <button class="delete-btn">Delete</button>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endfor %}
 {% endblock %}
