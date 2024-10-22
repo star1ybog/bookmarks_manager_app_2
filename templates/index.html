@@ -1,0 +1,23 @@
+<!-- templates/index.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Bookmarks Manager</h1>
+<div>
+    <form id="bookmark-form">
+        <input type="text" id="title" placeholder="Title" required />
+        <input type="url" id="url" placeholder="URL" required />
+        <input type="text" id="category" placeholder="Category" />
+        <button type="submit">Add Bookmark</button>
+    </form>
+</div>
+
+<ul id="bookmarks-list">
+    {% for bookmark in bookmarks %}
+    <li data-id="{{ bookmark.id }}">
+        <a href="{{ bookmark.url }}" target="_blank">{{ bookmark.title }}</a>
+        <button class="delete-btn">Delete</button>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}
