@@ -1,0 +1,23 @@
+<!-- templates/bookmark_detail.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Bookmark Details</h1>
+
+<p><strong>ID:</strong> {{ bookmark.id }}</p>
+<p><strong>Title:</strong> {{ bookmark.title }}</p>
+<p><strong>Category:</strong> {{ bookmark.category }}</p>
+<p><strong>URL:</strong> <a href="{{ bookmark.url }}" target="_blank">{{ bookmark.url }}</a></p>
+
+<a href="{{ url_for('index') }}">Back to Bookmarks</a>
+
+<h1>Edit Bookmark</h1>
+<form id="edit-bookmark-form">
+    <input type="text" id="edit-title" value="{{ bookmark.title }}" required />
+    <input type="url" id="edit-url" value="{{ bookmark.url }}" required />
+    <input type="text" id="edit-category" value="{{ bookmark.category }}" />
+    <button type="submit">Save Changes</button>
+    <input type="hidden" id="bookmark-id" value="{{ bookmark.id }}" />
+</form>
+<a href="{{ url_for('index') }}">Back to Bookmarks</a>
+{% endblock %}
