@@ -182,8 +182,19 @@ def content():
     for category in categorized_bookmarks:
         categorized_bookmarks[category].sort(key=lambda b: b['title'])
 
-    return render_template('index.html', username=username, categorized_bookmarks=categorized_bookmarks)
+    return render_template('index.html', username=username, categorized_bookmarks=categorized_bookmarks, logged_in=True)
 
+
+@app.context_processor
+def inject_user():
+    token = request.cookies.get('access_token')
+    if token:
+        try:
+            data = decode_jwt_token(token)
+            return {'logged_in': True, 'username': data['username']}
+        except:
+            return {'logged_in': False}
+    return {'logged_in': False}
 
 
 if __name__ == '__main__':

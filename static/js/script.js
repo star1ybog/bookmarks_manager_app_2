@@ -119,7 +119,6 @@ $(document).ready(function () {
             data: JSON.stringify({ title, url, category }),
             success: function (updatedBookmark) {
                 console.log('Bookmark updated:', updatedBookmark);
-                // Optionally redirect to the index or update the displayed bookmark
                 window.location.href = '/content'; // Redirect to the main bookmarks page
             },
             error: function (error) {
